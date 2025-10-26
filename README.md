@@ -67,38 +67,22 @@ git clone https://github.com/dharani18p/job-tracker.git
 cd job-tracker
 ```
 2. Backend Setup
-   ```
-
-Copy code
+```
 cd backend
 npm install
 Create a .env file in the /backend directory and add your variables:
-
-env
-Copy code
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 Start the backend server:
-
-bash
-Copy code
 node server.js
 Your API will be running at: http://localhost:5000
-
 ```
 3. Frontend Setup
 ```
 Open a new terminal and navigate to the frontend folder:
-
-Copy code
 cd frontend
 npm install
-
-
 Start the React development server:
-
-Copy code
 npm start
-
 Your application will open at: http://localhost:3000
 ```
