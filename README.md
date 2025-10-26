@@ -62,11 +62,13 @@ This project is a monorepo containing two main folders:
 
 ### 1. Clone the Repository
 
-```bash
+```
 git clone https://github.com/dharani18p/job-tracker.git
 cd job-tracker
+```
 2. Backend Setup
-bash
+   ```
+
 Copy code
 cd backend
 npm install
@@ -83,23 +85,20 @@ Copy code
 node server.js
 Your API will be running at: http://localhost:5000
 
+```
 3. Frontend Setup
+```
 Open a new terminal and navigate to the frontend folder:
 
-bash
 Copy code
 cd frontend
 npm install
-Important: In frontend/src/api/jobApi.js, ensure the baseURL points to your backend server:
 
-javascript
-Copy code
-const apiClient = axios.create({
-  baseURL: 'http://localhost:5000/api', 
-});
+
 Start the React development server:
 
-bash
 Copy code
 npm start
+
 Your application will open at: http://localhost:3000
+```
