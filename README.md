@@ -66,7 +66,7 @@ This project is a monorepo containing two main folders:
 git clone https://github.com/dharani18p/job-tracker.git
 cd job-tracker
 ```
-2. Backend Setup
+### 2. Backend Setup
 ```
 cd backend
 npm install
@@ -77,7 +77,7 @@ Start the backend server:
 node server.js
 Your API will be running at: http://localhost:5000
 ```
-3. Frontend Setup
+### 3. Frontend Setup
 ```
 Open a new terminal and navigate to the frontend folder:
 cd frontend
