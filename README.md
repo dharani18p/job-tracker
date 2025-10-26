@@ -55,34 +55,36 @@ This project is a monorepo containing two main folders:
 
 ## 🏃‍♂️ How to Run Locally
 
-### Prerequisites
+### 🧩 Prerequisites
+- **Node.js** (v18 or later)
+- **MongoDB Atlas** account *(or a local MongoDB instance)*
 
-- Node.js (v18 or later)
-- A MongoDB Atlas account (or a local MongoDB instance)
-
-### 1. Clone the Repository
-
-```
+### ⚙️ Steps to Run Locally
+```bash
+# 1. Clone the Repository
 git clone https://github.com/dharani18p/job-tracker.git
 cd job-tracker
-```
-### 2. Backend Setup
-```
+
+# 2. Backend Setup
 cd backend
 npm install
-Create a .env file in the /backend directory and add your variables:
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-Start the backend server:
+
+# Create a .env file inside the /backend directory and add the following:
+# ------------------------------------------------------
+# PORT=5000
+# MONGO_URI=your_mongodb_connection_string
+# ------------------------------------------------------
+
+# Start the backend server
 node server.js
-Your API will be running at: http://localhost:5000
-```
-### 3. Frontend Setup
-```
-Open a new terminal and navigate to the frontend folder:
-cd frontend
+# Your API will run at: http://localhost:5000
+
+# 3. Frontend Setup
+# Open a new terminal and run:
+cd ../frontend
 npm install
-Start the React development server:
+
+# Start the React development server
 npm start
-Your application will open at: http://localhost:3000
-```
+# Your application will open at: http://localhost:3000
+
