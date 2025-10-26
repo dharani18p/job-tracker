@@ -1,0 +1,591 @@
+/* frontend/src/App.css */
+
+/* --- Global & Layout --- */
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-color: #f1f5f9;
+  --light-gray: #334155;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  --glow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+  background-size: 400% 400%;
+  animation: gradientFlow 20s ease infinite;
+  color: var(--text-color);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Animated particles background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
+  animation: particleFloat 25s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glowing orbs */
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 70%);
+  animation: orbRotate 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gradientFlow {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes particleFloat {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+    opacity: 0.8;
+  }
+
+  66% {
+    transform: translate(-30px, 30px) rotate(240deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes orbRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeInDown 0.8s ease;
+}
+
+.header h1 {
+  color: white;
+  font-weight: 800;
+  font-size: 3.5rem;
+  text-shadow: 0 0 40px rgba(147, 51, 234, 0.5),
+    0 0 80px rgba(99, 102, 241, 0.3);
+  margin: 0;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textGlow 3s ease-in-out infinite;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textGlow {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.2);
+  }
+}
+
+/* --- Home Page Layout --- */
+.home-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 2.5rem;
+  }
+}
+
+.form-container,
+.list-container {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  padding: 35px;
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container::before,
+.list-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.form-container:hover::before,
+.list-container:hover::before {
+  left: 100%;
+}
+
+.form-container:hover,
+.list-container:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(99, 102, 241, 0.2);
+}
+
+.form-container h2,
+.list-container h2 {
+  margin-top: 0;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  position: relative;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-container h2::after,
+.list-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.5);
+}
+
+/* --- Form Styling --- */
+.job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.5);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: rgba(15, 23, 42, 0.7);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    0 0 0 4px rgba(99, 102, 241, 0.2),
+    0 0 20px rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 15px 40px rgba(99, 102, 241, 0.5),
+    0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+/* --- Job Card Styling --- */
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.job-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  display: grid;
+  grid-template-areas:
+    "header status"
+    "company company"
+    "date date"
+    "actions actions";
+  grid-template-columns: 1fr auto;
+  gap: 12px 20px;
+  border-left: 4px solid;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideInUp 0.5s ease backwards;
+}
+
+.job-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.job-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.job-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.job-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.job-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.job-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.job-card:hover::before {
+  opacity: 1;
+}
+
+/* Status-specific border colors with glow */
+.job-card.status-Applied {
+  border-left-color: #3b82f6;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    -4px 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.job-card.status-Interview {
+  border-left-color: #f59e0b;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    -4px 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.job-card.status-Offer {
+  border-left-color: #10b981;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    -4px 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.job-card.status-Rejected {
+  border-left-color: #ef4444;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    -4px 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.job-card-header {
+  grid-area: header;
+}
+
+.job-card-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.job-company {
+  grid-area: company;
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  margin: 0;
+}
+
+.job-date {
+  grid-area: date;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0;
+  font-weight: 500;
+}
+
+.job-status {
+  grid-area: status;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #64748b;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.job-status:hover {
+  transform: scale(1.05);
+}
+
+/* Status-specific tag colors */
+.job-card.status-Applied .job-status {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.job-card.status-Interview .job-status {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+.job-card.status-Offer .job-status {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.job-card.status-Rejected .job-status {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.job-actions {
+  grid-area: actions;
+  text-align: right;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-edit {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.btn-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 6px;
+  border: 2px solid rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+}
